@@ -1,6 +1,6 @@
 {
   "name": "coffeelint-callback-handle-error",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Coffeelint rule finds instances of error objects passed through a callback not being handled",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,7 @@
     "coffeelint-rule",
     "coffee-lint",
     "callback",
+    "handle",
     "error"
   ],
   "author": "Scott Graham",
