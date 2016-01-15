@@ -1,0 +1,27 @@
+{
+  "files": [
+    "index.coffee",
+    {
+      "pattern": "test/fixtures/*.coffee",
+      "ignore": false,
+      "instrument": false
+    }
+  ],
+  "tests": [
+    "test/*.coffee"
+  ],
+  "env": {
+    "type": "node"
+  },
+  "testFramework": "mocha",
+  "delays": {
+    "edit": 500,
+    "run": 150
+  },
+  "workers": {
+    "initial": 1,
+    "regular": 1
+  },
+  "recycle": true,
+  "debug": false
+}
