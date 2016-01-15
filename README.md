@@ -1,7 +1,14 @@
 # coffeelint-callback-handle-error
-CoffeeLint rule that finds instances of error objects passed through a callback not being handled
+CoffeeLint rule that finds instances of error objects passed through a callback not being handled. Error variables are determined with regex and must match this heregex:
+```coffee
+///
+  (^err(or)?$)
+  | (_err(or)?$)
+  | (^err(or)?_)
+///i
+```
 
-Ex: Any of these statements do not handle their error variable:
+Ex: Any of these code blocks do not handle their error variable:
 ```coffeescript
 fs.stat '/invalid/path/to/file', (err, stats)->
   console.log stats
