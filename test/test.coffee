@@ -23,9 +23,10 @@ describe 'lint the things', ->
 
   it 'random tests', =>
     getErrors('basic')
-    expect(@rule.errors.length).to.be.equal(3)
+    expect(@rule.errors.length).to.be.equal(4)
     expect(@rule.errors[0].lineNumber).to.be.equal(7)
     expect(@rule.errors[1].lineNumber).to.be.equal(14)
     expect(@rule.errors[2].lineNumber).to.be.equal(40)
+    expect(@rule.errors[3].lineNumber).to.be.equal(53)
     return
   return

@@ -28,14 +28,14 @@
     };
 
     CallbackHandleError.prototype.lintNode = function(node) {
-      var i, len, node_type, param, ref, var_name;
+      var i, len, node_type, param, ref, ref1, var_name;
       node_type = getNodeType(node);
       switch (node_type) {
         case 'Code':
           ref = node.params;
           for (i = 0, len = ref.length; i < len; i++) {
             param = ref[i];
-            var_name = param.name.value;
+            var_name = (ref1 = param.name) != null ? ref1.value : void 0;
             if (isErrorVariable(var_name)) {
               if (!this.handlesError(node, var_name)) {
                 this.throwError(node, "Error object '" + var_name + "' in callback not handled");

@@ -45,3 +45,11 @@ bad1 777, (overwritten_err, callback)->
     callback overwritten_err
     return
   return
+
+good 777, (stuff, ..., err, ttt)->
+  callback err
+  return
+
+badExpansion 777, (stuff, ..., err, ttt)->
+  callback ttt
+  return

@@ -30,7 +30,7 @@ module.exports = class CallbackHandleError
     switch node_type
       when 'Code'
         for param in node.params
-          var_name = param.name.value
+          var_name = param.name?.value
           if isErrorVariable var_name
             if not @handlesError node, var_name
               @throwError node, "Error object '#{var_name}' in callback not handled"
