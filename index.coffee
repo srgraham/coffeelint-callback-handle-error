@@ -53,7 +53,8 @@ module.exports = class CallbackHandleError
           child.condition.traverseChildren false, (inner_child)->
             inner_type = getNodeType inner_child
             switch inner_type
-              when 'Literal'
+              # HACK: Handles change of token naming in CoffeeScript 1.11.0
+              when 'Literal', 'IdentifierLiteral'
                 if inner_child.value is var_name
                   found_usage = true
                   return false
@@ -65,7 +66,8 @@ module.exports = class CallbackHandleError
             arg.traverseChildren false, (inner_child)->
               inner_type = getNodeType inner_child
               switch inner_type
-                when 'Literal'
+                # HACK: Handles change of token naming in CoffeeScript 1.11.0
+                when 'Literal', 'IdentifierLiteral'
                   if inner_child.value is var_name
                     found_usage = true
                     return false

@@ -63,6 +63,7 @@
               inner_type = getNodeType(inner_child);
               switch (inner_type) {
                 case 'Literal':
+                case 'IdentifierLiteral':
                   if (inner_child.value === var_name) {
                     found_usage = true;
                     return false;
@@ -79,6 +80,7 @@
                 inner_type = getNodeType(inner_child);
                 switch (inner_type) {
                   case 'Literal':
+                  case 'IdentifierLiteral':
                     if (inner_child.value === var_name) {
                       found_usage = true;
                       return false;
