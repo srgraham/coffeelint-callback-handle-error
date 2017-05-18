@@ -4,15 +4,14 @@ class Snake
       throw err
     return
   d:
-    bad: (err)->
+    bad: (err)-> # HIT
       return
     good: (err)->
       if err
         console.log err
       return
 
-bad 777, (err)->
-  # bad
+bad 777, (err)-> # HIT
   return
 
 good 777, (err)->
@@ -37,7 +36,7 @@ good1 777, (err, callback)->
     return
   return
 
-bad1 777, (overwritten_err, callback)->
+bad1 777, (overwritten_err, callback)-> # HIT
   if bad
     return
 
@@ -50,6 +49,6 @@ good 777, (stuff, ..., err, ttt)->
   callback err
   return
 
-badExpansion 777, (stuff, ..., err, ttt)->
+badExpansion 777, (stuff, ..., err, ttt)-> # HIT
   callback ttt
   return
