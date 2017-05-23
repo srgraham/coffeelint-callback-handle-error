@@ -18,15 +18,15 @@
     };
 
     CallbackHandleError.prototype.lintAST = function(node, astApi) {
-      var pattern;
+      var pattern, patterns, ref;
       this.astApi = astApi;
+      patterns = (ref = this.astApi.config.patterns) != null ? ref : this.rule.patterns;
       this.errorVariablePatterns = (function() {
-        var i, len, ref, results;
-        ref = astApi.config.patterns;
+        var i, len, results;
         results = [];
-        for (i = 0, len = ref.length; i < len; i++) {
-          pattern = ref[i];
-          results.push(new Regexp(pattern));
+        for (i = 0, len = patterns.length; i < len; i++) {
+          pattern = patterns[i];
+          results.push(new RegExp(pattern));
         }
         return results;
       })();

@@ -13,9 +13,9 @@ module.exports = class CallbackHandleError
     # param name config
     patterns: ["^err(or)?", "[Ee]rr(or)?$"]
 
-  lintAST: (node, astApi) ->
-    @astApi = astApi
-    @errorVariablePatterns = (new Regexp(pattern) for pattern in astApi.config.patterns)
+  lintAST: (node, @astApi) ->
+    patterns = @astApi.config.patterns ? @rule.patterns
+    @errorVariablePatterns = (new RegExp(pattern) for pattern in patterns)
     @lintNode node
     return
 
