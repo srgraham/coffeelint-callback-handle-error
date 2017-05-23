@@ -1,16 +1,7 @@
 # coffeelint-callback-handle-error
 
 CoffeeLint rule that finds instances of error objects passed through a callback
-function without being handled. By default, error parameters are detected with
-this regex:
-
-```coffee
-///
-  (^[Ee]rr(or)?$)
-  | (_[Ee]rr(or)?$)
-  | (^[Ee]rr(or)?_)
-///
-```
+function without being handled.
 
 Ex: Any of these code blocks do not handle their error variable:
 ```coffeescript
