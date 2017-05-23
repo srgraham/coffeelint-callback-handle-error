@@ -1,14 +1,5 @@
-
-getNodeType = (node)->
+getNodeType = (node) ->
   return node.constructor.name
-
-isErrorVariable = (var_name)->
-  regex = ///
-    (^err(or)?$)
-    | (_err(or)?$)
-    | (^err(or)?_)
-  ///i
-  return regex.test var_name
 
 module.exports = class CallbackHandleError
   rule:
@@ -19,21 +10,26 @@ module.exports = class CallbackHandleError
       Finds instances of error objects passed through a callback not being handled
     '''
 
-  lintAST: (node, astApi) ->
-    @astApi = astApi
+    # param name config
+    patterns: ["^err(or)?", "[Ee]rr(or)?$"]
+
+  lintAST: (node, @astApi) ->
+    patterns = @astApi.config.patterns ? @rule.patterns
+    @errorVariablePatterns = (new RegExp(pattern) for pattern in patterns)
     @lintNode node
     return
 
-  lintNode: (node)->
+  lintNode: (node) ->
     node_type = getNodeType(node)
 
     switch node_type
       when 'Code'
         for param in node.params
           var_name = param.name?.value
-          if isErrorVariable var_name
-            if not @handlesError node, var_name
+          for pattern in @errorVariablePatterns
+            if pattern.test(var_name) && !@handlesError(node, var_name)
               @throwError node, "Error object '#{var_name}' in callback not handled"
+              break
 
     node.eachChild (child)=>
       @lintNode child
@@ -89,7 +85,7 @@ module.exports = class CallbackHandleError
 
     return found_usage
 
-  throwError: (node, message)->
+  throwError: (node, message) ->
     err = @astApi.createError
       lineNumber: node.locationData.first_line + 1
       message: message

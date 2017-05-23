@@ -1,12 +1,7 @@
 # coffeelint-callback-handle-error
-CoffeeLint rule that finds instances of error objects passed through a callback not being handled. Error variables are determined with regex and must match this heregex:
-```coffee
-///
-  (^err(or)?$)
-  | (_err(or)?$)
-  | (^err(or)?_)
-///i
-```
+
+CoffeeLint rule that finds instances of error objects passed through a callback
+function without being handled.
 
 Ex: Any of these code blocks do not handle their error variable:
 ```coffeescript
@@ -43,18 +38,30 @@ doStuff 123, (callback)->
 ```
 
 ## Installation
+
 ```sh
 npm install coffeelint-callback-handle-error
 ```
+
 ## Usage
 
-Add the following configuration to coffeelint.json:
+To get started, insert this configuration somewhere in your `coffeelint.json`
+file:
 
 ```json
 "callback_handle_error": {
   "module": "coffeelint-callback-handle-error"
 }
 ```
+
 ## Configuration
 
-There are currently no configuration options.
+This plugin has one custom configurable option.
+
+### `patterns`: `["^err(or)?", "[Ee]rr(or)?$"]`
+
+A list of regular expressions used to match parameter names for detecting error
+objects in function parameters.
+
+The default setting looks for any variable which starts with "err"/"error" or ends with "err"/"Err" or
+"error"/"Error".
